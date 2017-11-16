@@ -19,13 +19,16 @@ fun todoTask7(client: Client?, message: String?, mailer: Mailer): Nothing = TODO
         Declarations of Client, PersonalInfo and Mailer are given below.
     """,
     documentation = doc7(),
-    references = { JavaCode7().sendMessageToClient(client, message, mailer) }
+    references = { sendMessageToClient(client, message, mailer) }
 )
 
 fun sendMessageToClient(
         client: Client?, message: String?, mailer: Mailer
 ) {
-    todoTask7(client, message, mailer)
+    val email = client?.personalInfo?.email
+    if (email != null && message != null) {
+        mailer.sendMessage(email, message)
+    }
 }
 
 class Client (val personalInfo: PersonalInfo?)
